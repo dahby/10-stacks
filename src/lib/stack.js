@@ -1,52 +1,56 @@
 'use strict';
 
 const Node = require('./node');
+const LinkedList = require('./linked-list');
 
 module.exports = class Stack {
   constructor() {
-    this.head = null;
+    this._storage = new LinkedList();
   }
 
   push(value) {
     const node = new Node(value);
-    if (this.head === null) {
-      this.head = node;
+
+    if (!this._storage.head) {
+      this._storage.head = node;
+      return this._storage;
     }
-    let currNode = this.head;
-    while (currNode) {
-      if (currNode.next === null) {
-        currNode.next = node;
-      }
+    let currNode = this._storage.head;
+    while (currNode.next) {
       currNode = currNode.next;
     }
+    currNode.next = node;
+    return this._storage;
   }
 
   pop() {
-    if (this.head === null) {
+    if (this._storage.head === null) {
       throw new Error('Cannot pop an empty list');
     }
-    let currNode = this.head;
-    while (currNode) {
-      if (currNode.next === null) {
-        currNode = null;
-      }
+    let currNode = this._storage.head;
+    if (!currNode.next) {
+      currNode = null;
+    }
+    while (currNode.next.next) {
       currNode = currNode.next;
     }
+    currNode.next = null;
+    return this._storage.head;
   }
 
   peek() {
-    if (this.head === null) {
+    if (this._storage.head === null) {
       throw new Error('Cannot peek at an empty list');
     }
-    let currNode = this.head;
-    while (currNode.next !== null) {
+    let currNode = this._storage.head;
+    while (currNode.next) {
       currNode = currNode.next;
     }
     return currNode;
   }
 
   isEmpty() {
-    if (this.head === null) {
+    if (this._storage.head === null) {
       return true;
     } 
     return false;
