@@ -8,7 +8,6 @@ module.exports = class LinkedList {
     this.head = null;
   }
 
-  // Big O = O(1)
   insertAtHead(value) {
     const node = new Node(value);
 
@@ -18,7 +17,6 @@ module.exports = class LinkedList {
     return this;
   }
 
-  // Big O = O(n)
   find(value) {
     if (!this.head) {
       throw new Error('__ERROR__ The list is empty');
@@ -38,7 +36,6 @@ module.exports = class LinkedList {
     return null;
   }
 
-  // Big O = O(n)
   pop(position) {
     if (!this.head) {
       throw new Error('__ERROR__ Empty list');
@@ -62,7 +59,6 @@ module.exports = class LinkedList {
     return this;
   }
 
-  // Big o = O(n)
   reduce() {
     let currentNode = this.head;
     let sum = 0;
