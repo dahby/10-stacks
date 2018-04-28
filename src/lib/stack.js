@@ -50,7 +50,7 @@ module.exports = class Stack {
   }
 
   isEmpty() {
-    if (this._storage.head === null) {
+    if (!this._storage.head) {
       return true;
     } 
     return false;
